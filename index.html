@@ -14,7 +14,7 @@
                 <button class="tab_btn">BMI Calculator</button>
                 <button class="tab_btn">Body Fat Calculator</button>
                 <button class="tab_btn">Ideal Weight Calculator</button>
-                <button class="tab_btn">Calories Deficit Calculator</button>
+                <button class="tab_btn">Daily Caloric Intake Calculator</button>
                 <div class="line"></div>
             </div>
             <div class="content_box">
@@ -152,29 +152,29 @@
                 </div>
 
                 <div class="content">
-                    <h2>Calories Deficit Calculator</h2>
+                    <h2>Daily Caloric Intake Calculator</h2>
                     <p>Enter the following information and click on "Submit" to calculate the calories 
-                        you need to burn for the selected goal.</p>
+                        you must consume daily for the selected goal.</p>
                     <form>
                         <table>
                             <tr>
                                 <td>
-                                    <label for="weight2">Weight in kilograms:</label>
+                                    <label for="weight3">Weight in kilograms:</label>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" id="weight2" placeholder="Enter your weight" required>
+                                    <input type="text" id="weight3" placeholder="Enter your weight" required>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="height2">Height in meters:</label>
+                                    <label for="height4">Height in meters:</label>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" id="height2" placeholder="Enter your height" required>
+                                    <input type="text" id="height4" placeholder="Enter your height" required>
                                 </td>
                             </tr>
                             <tr>
@@ -184,38 +184,65 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" id="userBMI" placeholder="Enter your BMI (optional)">
+                                    <input type="text" id="userBMI2" placeholder="Enter your BMI (optional)">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="gender">Gender ("male"/"female"):</label>
+                                    <label for="gender3">Gender ("male"/"female"):</label>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" id="gender" placeholder="Enter your gender">
+                                    <input type="text" id="gender3" placeholder="Enter your gender">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="age">Age:</label>
+                                    <label for="age2">Age:</label>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" id="age" placeholder="Enter your age" required>
+                                    <input type="text" id="age2" placeholder="Enter your age" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="goal">Goal:</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select id="goal" name="goal" required>
+                                        <option value="weight_loss">I want to lose weight</option>
+                                        <option value="weight_maintenance">I want to maintain weight</option>
+                                        <option value="weight_gain">I want to gain weight</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="activityLevel">Activity Level:</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select id="activityLevel" name="activityLevel" required>
+                                        <option value="sedentary">I live a sedentary lifestyle</option>
+                                        <option value="lightly_active">I live a lightly active lifestyle</option>
+                                        <option value="active">I live an active lifestyle</option>
+                                        <option value="very_active">I live a very active lifestyle</option>
+                                    </select>
                                 </td>
                             </tr>
                         </table>
                         <br>
                     </form>
-                    <button id="bodyfat_btn">Submit</button>
+                    <button id="calories_btn">Submit</button>
                     <br><br>
-                    <p id="calculatedBodyFat"></p>
+                    <p id="calculatedCalories"></p>
                 </div>
-
-                
             </div>
         </div>
         <script>
@@ -224,10 +251,13 @@
             const bmiBTN = document.querySelector("#bmi_btn");
             const bodyFatBTN = document.querySelector("#bodyfat_btn");
             const idealWeightBTN = document.querySelector("#idealweight_btn");
+            const caloriesBTN = document.querySelector("#calories_btn");
             const theIdealWeight = document.querySelector("#calculatedIdeal");
             const theBodyFat = document.querySelector("#calculatedBodyFat");
             const theBMI = document.querySelector("#calculatedBMI");
+            const theCalories = document.querySelector("#calculatedCalories");
             const userBMIInput = document.querySelector("#userBMI");
+            const userBMIInput2 = document.querySelector("#userBMI2");
             
 
             // event listener to move amongst tabs and to remove the content from the previous tab
@@ -249,6 +279,7 @@
             bmiBTN.addEventListener("click", getBMI);
             bodyFatBTN.addEventListener("click", getBodyFat);
             idealWeightBTN.addEventListener("click", getIdealWeight);
+            caloriesBTN.addEventListener("click", getCalories);
 
             // function to retrieve bmi from local host
             function getBMI() {
@@ -281,8 +312,6 @@
                     .then(data => {
                         if (data.bodyFat === null) {
                             theBodyFat.innerHTML = "Please fill out all fields.";
-                            console.log(`http://localhost:3000/bodyfat?weight=${theWeight}&height=${theHeight}
-                                &age=${theAge}&gender=${theGender}`);
                         } else {
                             theBodyFat.innerHTML = `Your calculated body fat percentage is ${data.bodyFat}%.`;
                         }
@@ -300,6 +329,7 @@
                 }
             }            
 
+            // functions to retrieve ideal weight from local host
             function getIdealWeight() {
                 const theHeight = document.querySelector("#height3").value;
                 const theGender = document.querySelector("#gender2").value;
@@ -315,7 +345,38 @@
                 })
             }
 
+            // function to retrieve calories to be burned from local host
+            function getCalories() {
+                const theWeight = document.querySelector("#weight3").value;
+                const theHeight = document.querySelector("#height4").value;
+                const theBMI = userBMIInput2.value;
+                const theGender = document.querySelector("#gender3").value;
+                const theAge = document.querySelector("#age2").value;
+                const theGoal = document.querySelector("#goal").value;
+                const theActivityLevel = document.querySelector("#activityLevel").value;
 
+                // Check if any required field is missing or empty
+                if (!theWeight || !theHeight || !theAge || !theGender || !theGoal || !theActivityLevel) {
+                    theCalories.innerHTML = "Please fill out all fields.";
+                    return;
+                }
+
+                // Make a GET request to the server's /caloriesburned endpoint
+                const url = `http://localhost:3000/caloriesburned?bmi=${theBMI}&goal=${theGoal}&weight=${theWeight}&height=${theHeight}&age=${theAge}&gender=${theGender}&activityLevel=${theActivityLevel}`;
+                fetch(url)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.recommendedCalories === null) {
+                            theCalories.innerHTML = "Please fill out all fields.";
+                        } else {
+                            theCalories.innerHTML = `To achieve your goal, you must consume ${data.recommendedCalories} daily.`;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching data:', error.message);
+                        theCalories.innerHTML = "An error occurred while fetching data. Please try again later.";
+                    });
+            }
         </script>
     </body>
 </html>
