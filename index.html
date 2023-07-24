@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Fitness and Calorie Calculator</title>
+        <link rel="stylesheet" href="style.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="tab_box">
+                <button class="tab_btn active">Home</button>
+                <button class="tab_btn">BMI Calculator</button>
+                <button class="tab_btn">Body Fat Calculator</button>
+                <button class="tab_btn">Ideal Weight Calculator</button>
+                <button class="tab_btn">Calories Deficit Calculator</button>
+                <div class="line"></div>
+            </div>
+            <div class="content_box">
+                <div class="content active">
+                    <h2>Home</h2>
+                    <p>Welcome to the Health and Calorie Calculator.</p>
+                </div>
+
+                <div class="content">
+                    <h2>BMI Calculator</h2>
+                    <p>Enter the following information and click on "Submit" to calculate your BMI.</p>
+                    <form>
+                        <table>
+                            <tr>
+                                <td>
+                                    <label for="weight">Weight in kilograms:</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" id="weight1" placeholder="Enter your weight" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="height1">Height in meters:</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" id="height1" placeholder="Enter your height" required>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                    <br>
+                    <p id="calculatedBMI"></p>
+                    <input type="submit" value="Submit" id="bmi_btn">
+                </div>
+
+                <div class="content">
+                    <h2>Body Fat Calculator</h2>
+                    <p>Enter the following information and click on "Submit" to calculate your Body Fat Percentage.</p>
+                    <form>
+                        <table>
+                            <tr>
+                                <td>
+                                    <label for="weight2">Weight in kilograms:</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" id="weight2" placeholder="Enter your weight" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="height2">Height in meters:</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" id="height2" placeholder="Enter your height" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="bmi">BMI:</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" id="userBMI" placeholder="Enter your BMI (optional)">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="gender">Gender ("male"/"female"):</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" id="gender" placeholder="Enter your gender">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="age">Age:</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" id="age" placeholder="Enter your age" required>
+                                </td>
+                            </tr>
+                        </table>
+                        <br>
+                    </form>
+                    <button id="bodyfat_btn">Submit</button>
+                    <br><br>
+                    <p id="calculatedBodyFat"></p>
+                </div>
+
+                <div class="content">
+                    <h2>Ideal Weight Calculator</h2>
+                    <p>Enter the following information and click on "Submit" to calculate your ideal weight.</p>
+                    <form>
+                        <table>
+                            <tr>
+                                <td>
+                                    <label for="height3">Height in meters:</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" id="height3" placeholder="Enter your height" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="gender2">Gender ("male"/"female"):</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" id="gender2" placeholder="Enter your gender">
+                                </td>
+                            </tr>
+                </div>
+
+                <div class="content">
+                    <h2>Calories Deficit Calculator</h2>
+                    <p>Enter the following information and click on "Submit" to calculate the calories 
+                        you need to burn for the selected goal.</p>
+                    <form>
+                        <table>
+                            <tr>
+                                <td>
+                                    <label for="weight2">Weight in kilograms:</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" id="weight2" placeholder="Enter your weight" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="height2">Height in meters:</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" id="height2" placeholder="Enter your height" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="bmi">BMI:</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" id="userBMI" placeholder="Enter your BMI (optional)">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="gender">Gender ("male"/"female"):</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" id="gender" placeholder="Enter your gender">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="age">Age:</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" id="age" placeholder="Enter your age" required>
+                                </td>
+                            </tr>
+                        </table>
+                        <br>
+                    </form>
+                    <button id="bodyfat_btn">Submit</button>
+                    <br><br>
+                    <p id="calculatedBodyFat"></p>
+                </div>
+
+                
+            </div>
+        </div>
+        <script>
+            const tabs = document.querySelectorAll('.tab_btn');
+            const all_content = document.querySelectorAll('.content');
+            const bmiBTN = document.querySelector("#bmi_btn");
+            const bodyFatBTN = document.querySelector("#bodyfat_btn");
+            const theBodyFat = document.querySelector("#calculatedBodyFat");
+            const theBMI = document.querySelector("#calculatedBMI");
+            const userBMIInput = document.querySelector("#userBMI");
+
+            // event listener to move amongst tabs and to remove the content from the previous tab
+            tabs.forEach((tab, index) => {
+                tab.addEventListener('click', (e) => {
+                    tabs.forEach(tab => {tab.classList.remove('active')});
+                    tab.classList.add('active');
+
+                    var line=document.querySelector('.line');
+                line.style.width = e.target.offsetWidth + "px";
+                line.style.left = e.target.offsetLeft + "px";
+
+                all_content.forEach(content => {content.classList.remove('active')});
+                all_content[index].classList.add('active');
+                })
+            })
+
+            // adding event listeners to each of the submit buttons
+            bmiBTN.addEventListener("click", getBMI);
+            bodyFatBTN.addEventListener("click", getBodyFat);
+
+            // function to retrieve bmi from local host
+            function getBMI() {
+                const theWeight = document.querySelector("#weight1").value;
+                const theHeight = document.querySelector("#height1").value;
+
+                fetch(`http://localhost:3000/bmi?weight=${theWeight}&height=${theHeight}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.bmi === null) {
+                        theBMI.innerHTML = "Please fill out all fields.";
+                    } else {
+                        theBMI.innerHTML = `Your calculated BMI is ${data.bmi}.`;
+                    }
+                })
+            }
+
+            // function to retrieve body fat percentage from local host
+            function getBodyFat() {
+                const theWeight = document.querySelector("#weight2").value;
+                const theHeight = document.querySelector("#height2").value;
+                const theBMI = userBMIInput.value;
+                const theGender = document.querySelector("#gender").value;
+                const theAge = document.querySelector("#age").value;
+
+                if (theBMI === "") {
+                    fetch(`http://localhost:3000/bodyfat?weight=${theWeight}&height=${theHeight}
+                    &age=${theAge}&gender=${theGender}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.bodyFat === null) {
+                            theBodyFat.innerHTML = "Please fill out all fields.";
+                            console.log(`http://localhost:3000/bodyfat?weight=${theWeight}&height=${theHeight}
+                                &age=${theAge}&gender=${theGender}`);
+                        } else {
+                            theBodyFat.innerHTML = `Your calculated body fat percentage is ${data.bodyFat}%.`;
+                        }
+                    })                
+                } else {
+                    fetch(`http://localhost:3000/bodyfat?bmi=${theBMI}&age=${theAge}&gender=${theGender}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.bodyFat === null) {
+                            theBodyFat.innerHTML = "Please fill out all fields.";
+                        } else {
+                            theBodyFat.innerHTML = `Your calculated body fat percentage is ${data.bodyFat}%.`;
+                        }
+                    })     
+                }
+            }            
+
+
+
+
+        </script>
+    </body>
+</html>
