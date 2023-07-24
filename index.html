@@ -125,7 +125,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    <label for="height3">Height in meters:</label>
+                                    <label for="height3">Height in centimeters:</label>
                                 </td>
                             </tr>
                             <tr>
@@ -143,13 +143,19 @@
                                     <input type="text" id="gender2" placeholder="Enter your gender">
                                 </td>
                             </tr>
+                        </table>
+                        <br>
+                    </form>
+                    <button id="idealweight_btn">Submit</button>
+                    <br><br>
+                    <p id="calculatedIdeal"></p>
                 </div>
 
                 <div class="content">
                     <h2>Calories Deficit Calculator</h2>
                     <p>Enter the following information and click on "Submit" to calculate the calories 
                         you need to burn for the selected goal.</p>
-                    <form>
+                    <!-- <form>
                         <table>
                             <tr>
                                 <td>
@@ -207,7 +213,7 @@
                     <button id="bodyfat_btn">Submit</button>
                     <br><br>
                     <p id="calculatedBodyFat"></p>
-                </div>
+                </div> -->
 
                 
             </div>
@@ -217,9 +223,12 @@
             const all_content = document.querySelectorAll('.content');
             const bmiBTN = document.querySelector("#bmi_btn");
             const bodyFatBTN = document.querySelector("#bodyfat_btn");
+            const idealWeightBTN = document.querySelector("#idealweight_btn");
+            const theIdealWeight = document.querySelector("#calculatedIdeal");
             const theBodyFat = document.querySelector("#calculatedBodyFat");
             const theBMI = document.querySelector("#calculatedBMI");
             const userBMIInput = document.querySelector("#userBMI");
+            
 
             // event listener to move amongst tabs and to remove the content from the previous tab
             tabs.forEach((tab, index) => {
@@ -239,6 +248,7 @@
             // adding event listeners to each of the submit buttons
             bmiBTN.addEventListener("click", getBMI);
             bodyFatBTN.addEventListener("click", getBodyFat);
+            idealWeightBTN.addEventListener("click", getIdealWeight);
 
             // function to retrieve bmi from local host
             function getBMI() {
@@ -290,7 +300,20 @@
                 }
             }            
 
+            function getIdealWeight() {
+                const theHeight = document.querySelector("#height3").value;
+                const theGender = document.querySelector("#gender2").value;
 
+                fetch(`http://localhost:3000/idealweight?height=${theHeight}&gender=${theGender}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.idealWeight === null) {
+                        theIdealWeight.innerHTML = "Please fill out all fields.";
+                    } else {
+                        theIdealWeight.innerHTML = `Your calculated ideal weight is ${data.idealWeight} kilograms.`;
+                    }
+                })
+            }
 
 
         </script>
