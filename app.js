@@ -33,7 +33,7 @@ app.get('/bodyfat', (req, res) => {
 app.get('/idealweight', (req, res) => {
     const { height, gender } = req.query;
     let theIdealWeight;
-    if(gender === 'male') {
+    if (gender === 'male') {
         theIdealWeight = 50 + (0.91 * (height - 152.4));
     } else if (gender === 'female') {
         theIdealWeight = 45.5 + (0.91 * (height = 152.4));
